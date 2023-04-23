@@ -12,7 +12,7 @@
         session_start();
         session_destroy();
         echo 'You have logged out';
-        header('URL ./Login.html');
+        header('Refresh: 1; URL = ./Login.html');
     ?>
 </body>
 

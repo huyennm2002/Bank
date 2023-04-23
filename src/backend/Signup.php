@@ -23,7 +23,7 @@
         printf("Connect failed: %s\n", $mysqli->connect_error);
         exit();
       } else{
-        $sql = "INSERT INTO USERS (NAME, EMAIL, PASSWORD, SSN, ADDRESS, PHONE) VALUES ('$name', '$email', '$pw', '$ssn', '$address', '$phone');";
+        $sql = "INSERT INTO USERS (Name, Email, Password, SSN, ADDRESS, Phone) VALUES ('$name', '$email', '$pw', '$ssn', '$address', '$phone');";
         if ($mysqli->query($sql) === TRUE) {
           echo "<p>User was successfully created</p>";
         }
