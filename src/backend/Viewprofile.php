@@ -36,3 +36,5 @@
     $mysqli->close();
   ?>
 </body>
+
+</html>
