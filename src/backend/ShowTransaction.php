@@ -12,7 +12,7 @@
     ini_ set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
-    $uid = $_SESSION['id'];
+    $tid = $_SESSION['id'];
     $mysqli = new mysqli("mysql.eecs.ku.edu", "m449n496", "mae9AhH3", "m449n496");
     if($mysqli -> connect_errno){
       printf("Connection failed: %s\n", $mysqli->connect_error);
