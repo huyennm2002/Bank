@@ -27,8 +27,8 @@
           echo "<p> Phone Number: " . $customer["Phone"] . "</p>";
           echo "<p> Address: " . $customer["Address"] . "</p>";
         }
-        $result->free();
       }
+      $result->free();
     }
     $mysqli->close();
   ?>

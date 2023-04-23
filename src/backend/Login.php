@@ -12,14 +12,15 @@
     ini_ set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
-      session_start();
-      $mysqli = new mysqli("mysql.eecs.ku.edu", "m449n496", "mae9AhH3", "m449n496");
-      if ( mysqli_connect_errno() ) {
-        printf("Connect failed: %s\n", $mysqli->connect_error);
-        exit();
-      if ( !isset($_POST['username'], $_POST['password']) ) {
-        exit('Please fill both the username and password fields!');
-      }
+    session_start();
+    $mysqli = new mysqli("mysql.eecs.ku.edu", "m449n496", "mae9AhH3", "m449n496");
+    if ( mysqli_connect_errno() ) {
+      printf("Connect failed: %s\n", $mysqli->connect_error);
+      exit();
+    }
+    if ( !isset($_POST['username'], $_POST['password']) ) {
+      exit('Please fill both the username and password fields!');
+    }
     $query = "SELECT ID, email, password from Customer ORDER by ID ASC";
     $loggedIn = FALSE;
     if ($result = $mysqli->query($query)) {
