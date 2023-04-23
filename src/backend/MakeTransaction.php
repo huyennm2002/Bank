@@ -26,8 +26,9 @@
           echo "<p>Transaction was successfully created</p>";
         }
       $mysqli->close();
-    }
+      }
 	}
+
 
   function error($msg) {
   ?>
@@ -44,3 +45,4 @@
 </body>
 
 </html>
+
