@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Transaction</title>
+  <title>Show Transaction</title>
 </head>
 
 <body>
@@ -21,13 +21,12 @@
       session_start();
       $query = "SELECT SenderID, ReceiverID, Note, Amount, TransactionDate from Customers WHERE ID = '$tid'";
       if ($result = $mysqli->query($query)) {
-        while ($customer = $result->fetch_assoc()) {
+        while ($transaction = $result->fetch_assoc()) {
           echo "<p> SenderID: " . $transaction["SenderID"] . "</p>"; 
           echo "<p> ReceiverID: " . $transaction["ReceiverID"] . "</p>";
           echo "<p> Note: " . $transaction["Note"] . "</p>";
           echo "<p> Amount:  " . $transaction["Amount"] . "</p>";
           echo "<p> TransactionDate: " . $transaction["Transaction date"] . "</p>";
-          
         }
         $result->free();
       }
