@@ -15,8 +15,8 @@
       session_start();
       $mysqli = new mysqli("mysql.eecs.ku.edu", "m449n496", "mae9AhH3", "m449n496");
       if ( mysqli_connect_errno() ) {
-        exit('Failed to connect to MySQL: ' . mysqli_connect_error());
-      }
+        printf("Connect failed: %s\n", $mysqli->connect_error);
+        exit();
       if ( !isset($_POST['username'], $_POST['password']) ) {
         exit('Please fill both the username and password fields!');
       }
@@ -24,7 +24,7 @@
     $loggedIn = FALSE;
     if ($result = $mysqli->query($query)) {
       while ($entity = $result->fetch_assoc()) {
-        if($entity["email"] == $_POST['email'] and $entity["PASSWORD"] == $_POST['password'])
+        if($entity["Email"] == $_POST['email'] and $entity["Password"] == $_POST['password'])
         {
           $flag = TRUE;
           $_SESSION['loggedin'] = TRUE;
