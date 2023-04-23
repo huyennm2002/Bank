@@ -22,6 +22,8 @@
       $query = "SELECT SenderID, ReceiverID, Note, Amount, TransactionDate from Customers WHERE ID = '$tid'";
       if ($result = $mysqli->query($query)) {
         while ($customer = $result->fetch_assoc()) {
+          echo "<p> SenderID: " . $transaction["SenderID"] . "</p>"; 
+          echo "<p> ReceiverID: " . $transaction["ReceiverID"] . "</p>";
           echo "<p> Note: " . $transaction["Note"] . "</p>";
           echo "<p> Amount:  " . $transaction["Amount"] . "</p>";
           echo "<p> TransactionDate: " . $transaction["Transaction date"] . "</p>";
