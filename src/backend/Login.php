@@ -24,8 +24,7 @@
     $loggedIn = FALSE;
     if ($result = $mysqli->query($query)) {
       while ($entity = $result->fetch_assoc()) {
-        if($entity["Email"] == $_POST['email'] and $entity["Password"] == $_POST['password'])
-        {
+        if($entity["Email"] == $_POST['email'] and $entity["Password"] == $_POST['password']) {
           $flag = TRUE;
           $_SESSION['loggedin'] = TRUE;
           $_SESSION['id'] = $entity["ID"];
