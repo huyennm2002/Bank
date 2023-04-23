@@ -33,7 +33,7 @@
 
   function error($msg) {
   ?>
-      <form method="GET" action="/src/Signup.html">
+      <form method="GET" action="/src/frontend/Signup.html">
         <div class="container">
           <span>Error: <?= $msg ?></span>
           <button class="backbtn" type="submits">Try again!</button>
