@@ -18,10 +18,6 @@
       exit();
     } else {
       session_start();
-      $name= $_POST ['name'];
-      $email = $_POST['email'];
-      $phone= $_POST ['phone'];
-      $adress = $_POST['address'];
       $query = "SELECT Name, Email, Phone, Address from Customers ORDER by ID ASC";
       if ($result = $mysqli->query($query)) {
         while ($customer = $result->fetch_assoc()) {
