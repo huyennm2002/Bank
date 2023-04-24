@@ -1,0 +1,18 @@
+In the dashboard page (Dashboard.html) we are displaying the following information:
+1)Name 2)Account Type 3)AID# 4)Balance
+After login is successful, the sigin in "Signup.php" following session variables must be set so that we can display their values:
+
+$_SESSION['loginSuccessful'] = True;
+$_SESSION['cid'] = CID;
+$_SESSION['name'] = Name;
+$_SESSION['accountType'] = Account Type;
+$_SESSION['aid'] = AID;
+$_SESSION['balance'] = Balance;
+
+If login is successful further all pages and queries related to customer depends on CID#, also fill all remaining variables, if login fails set the value 'loginSuccessful' = False; Do not set remaining variables.
+
+
+
+
+
+
