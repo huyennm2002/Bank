@@ -42,7 +42,7 @@
         echo "<p>Error, cannot make transaction</p>";
       }
       $query = "UPDATE Accounts SET balance = balance + $amount WHERE ID = '$receiver_id'"; 
-      $create_query = "INSERT INTO Actions (AccountID, Amount, Note, TransactionDate) values ('$sender_id', '$amount', '$note', '$transactiondate','Transaction', NOW())";
+      $create_query = "INSERT INTO Actions (AccountID, Amount, Note, TransactionDate) values ('$receiver_id', '$amount', '$note', '$transactiondate','Transaction', NOW())";
       $mysqli->close();
     }
   }
