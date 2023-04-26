@@ -1,3 +1,17 @@
+<?php
+  session_start();
+  if(isset($_SESSION['loginSuccessful'])){
+    $loginSuccessful = $_SESSION['loginSuccessful']; 
+    if ($loginSuccessful == False){
+      header('Location: SignIn.html');
+      exit();
+    }
+  } else{
+    header('Location: SignIn.html');
+    exit();
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,63 +72,51 @@
 </head>
 <body>
   <div class="input">
-    <a href="SignIn.html" class="backbtn">Log Out</a>
+    <a href="Logout.php" class="backbtn">Log Out</a>
   </div>
   <h1><center>Lawrence Public Bank Dashboard</center></h1>
-  <?php
-         if(isset($_SESSION['loginSuccessful'])){
-         $loginSuccessful = $_SESSION['loginSuccessful']; 
-         if ($loginSuccessful == False){
-            header('Location: SignIn.html');
-            // or die();
-            exit();
-            }
-         }
-         else{
-            header('Location: SignIn.html');
-            exit();
-         }
 
-      }
-  ?>
-      <!-- Validate signin php file--> 
-  <form action="/src/backend/Signup.php" method="POST">
-
+  <form>
     <div class="input">
-      <label for="name">Name:</label>
+      Name:
       <?php
          if(isset($_SESSION['name'])){
           echo $_SESSION['name']; 
          }
         ?>
     </div> 
-       
-      <div class="input">
-      <label for="accountType">Account Type:</label>
-     <?php
-         if(isset($_SESSION['accountType'])){
-          echo $_SESSION['accountType']; 
-         }
-        ?>
-      </div> 
+    <form method="GET" action="Showaccounts.php">
+      <!-- <div class="container">
+        <span>Error: <?= $msg ?></span>
+        <button class="backbtn" type="submits">Try again!</button>
+      </div> -->
+    </form>
+    <!--  <div class="input">-->
+    <!--  <label for="accountType">Account Type:</label>-->
+    <!-- <?php-->
+    <!--     if(isset($_SESSION['accountType'])){-->
+    <!--      echo $_SESSION['accountType']; -->
+    <!--     }-->
+    <!--    ?>-->
+    <!--  </div> -->
       
-    <div class="input">
-      <label for="aid">AID#:</label>
-     <?php
-         if(isset($_SESSION['aid'])){
-          echo $_SESSION['aid']; 
-         }
-        ?>
-    </div>
+    <!--<div class="input">-->
+    <!--  <label for="aid">AID#:</label>-->
+    <!-- <?php-->
+    <!--     if(isset($_SESSION['aid'])){-->
+    <!--      echo $_SESSION['aid']; -->
+    <!--     }-->
+    <!--    ?>-->
+    <!--</div>-->
     
-    <div class="input">
-      <label for="balance">Balance:</label>
-     <?php
-         if(isset($_SESSION['balance'])){
-          echo $_SESSION['balance']; 
-         }
-     ?>
-    </div> <br> <br>
+    <!--<div class="input">-->
+    <!--  <label for="balance">Balance:</label>-->
+    <!-- <?php-->
+    <!--     if(isset($_SESSION['balance'])){-->
+    <!--      echo $_SESSION['balance']; -->
+    <!--     }-->
+    <!-- ?>-->
+    <!--</div> <br> <br>-->
   <p>If you would like to deposit or withdraw money, click here:</p>    
   <div>
     <a href="Action.html" class="backbtn">Action</a>
