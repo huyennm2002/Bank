@@ -1,49 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Log In</title>
-</head>
-
-<body>
-  <?php
-    ini_ set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
-    error_reporting(E_ALL);
+<?php
     session_start();
-    $mysqli = new mysqli("mysql.eecs.ku.edu", "m449n496", "mae9AhH3", "m449n496");
-    if ( mysqli_connect_errno() ) {
-      printf("Connect failed: %s\n", $mysqli->connect_error);
-      exit();
-    }
-    if ( !isset($_POST['username'], $_POST['password']) ) {
+    include 'Connection.php';
+    ob_start();
+    if ( !isset($_POST['email'], $_POST['password']) ) {
       exit('Please fill both the username and password fields!');
     }
-    $query = "SELECT ID, email, password from Customer ORDER by ID ASC";
-    $loggedIn = FALSE;
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $query = "SELECT ID, Password from Customers WHERE email='$email';";
     if ($result = $mysqli->query($query)) {
       while ($entity = $result->fetch_assoc()) {
-        if($entity["Email"] == $_POST['email'] and $entity["Password"] == $_POST['password']) {
+        if($entity["Password"] == $password) {
           $flag = TRUE;
-          $_SESSION['loggedin'] = TRUE;
+          $_SESSION['loginSuccessful'] = True;
           $_SESSION['id'] = $entity["ID"];
-          header('Location: ../home.php');
+          echo "<p> You have successfully logged in! </p>";
+            header('Location: http://eecs447prj.000webhostapp.com/Dashboard.html');
           exit;
         }
       }
-      if(!$loggedIn)
-      {
-        $_SESSION['loggedin'] = FALSE;   
-        echo "<p> You have incorrectly ! </p>";
-      }
       $result->free();
     }
-    echo "<a href="">Try again</a>";
+    echo "<p> Failed Authentication! </p>";
+    echo "<a href='./SignIn.html'>Try again</a>";
     $mysqli->close();
-  ?>
-
-</body>
-
-</html>
+?>
