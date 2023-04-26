@@ -63,7 +63,7 @@
   <h1><center>WELCOME TO Lawrence Public Bank!</center></h1>
   <p>This application should take up to 5 minutes to complete. Note that you must be 18 or older to apply online.</p>
   <p>For a NEW membership you will need:</p>
-  <form action="/src/backend/Signup.php" method="POST">
+  <form action="Signup.php" method="POST">
       <!--  1)Jaga--> 
        <p style="font-size:150%;">Create User:</p> 
     <div class="input">
@@ -75,14 +75,9 @@
       <input type="email" placeholder="test@gmail.com"name="email" value="" required>
     </div>
     <div class="input">
-      <label for="userName">Username*</label>
-      <input type="text" placeholder="Please enter your username"name="userName" value="" required>
-    </div>
-    <div class="input">
       <label for="password">Password*</label>
       <input type="password" name="password" value="" required>
     </div>
-    
     <div class="input">
       <label for="password">Re-Enter Password*</label>
       <input type="password" name="password" value="" required>
@@ -100,16 +95,16 @@
       <input type="text" name="address" value="">
     </div>
     
-  <div class="input">
-  <label for="accountType">Choose account type*:</label>
-  <select name="accountType" id="accountType">
-    <option value="checkings">Checkings</option>
-    <option value="savings">Savings</option>
-  </select>
-  </div><br>
+    <div class="input">
+    <label for="accountType">Choose account type*:</label>
+    <select name="accountType" id="accountType">
+      <option value="checkings">Checkings</option>
+      <option value="savings">Savings</option>
+    </select>
+    </div><br>
   
     <div>
-      <button type="submit">Join</button>
+      <input type="submit">
     </div>
   </form>
        <!-- 3)reduce space--> 
