@@ -1,19 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Log Out</title>
-</head>
-
-<body>
-    <?php
-        session_start();
-        session_destroy();
-        echo 'You have logged out';
-        header('Refresh: 1; URL = ./Login.html');
-    ?>
-</body>
-
-</html>
+<?php
+  session_start();
+  ob_start();
+  session_destroy();
+  echo 'You have logged out';
+  header('Refresh: 1; URL = ./SignIn.html');
+?>
