@@ -1,5 +1,6 @@
 <?php
   session_start();
+  include 'Connection.php';
   if(isset($_SESSION['loginSuccessful'])){
     $loginSuccessful = $_SESSION['loginSuccessful']; 
     if ($loginSuccessful == False){
@@ -76,7 +77,7 @@
   </div>
   <h1><center>Lawrence Public Bank Dashboard</center></h1>
 
-  <form>
+  <div>
     <div class="input">
       Name:
       <?php
@@ -84,39 +85,24 @@
           echo $_SESSION['name']; 
          }
         ?>
-    </div> 
-    <form method="GET" action="Showaccounts.php">
-      <!-- <div class="container">
-        <span>Error: <?= $msg ?></span>
-        <button class="backbtn" type="submits">Try again!</button>
-      </div> -->
-    </form>
-    <!--  <div class="input">-->
-    <!--  <label for="accountType">Account Type:</label>-->
-    <!-- <?php-->
-    <!--     if(isset($_SESSION['accountType'])){-->
-    <!--      echo $_SESSION['accountType']; -->
-    <!--     }-->
-    <!--    ?>-->
-    <!--  </div> -->
-      
-    <!--<div class="input">-->
-    <!--  <label for="aid">AID#:</label>-->
-    <!-- <?php-->
-    <!--     if(isset($_SESSION['aid'])){-->
-    <!--      echo $_SESSION['aid']; -->
-    <!--     }-->
-    <!--    ?>-->
-    <!--</div>-->
-    
-    <!--<div class="input">-->
-    <!--  <label for="balance">Balance:</label>-->
-    <!-- <?php-->
-    <!--     if(isset($_SESSION['balance'])){-->
-    <!--      echo $_SESSION['balance']; -->
-    <!--     }-->
-    <!-- ?>-->
-    <!--</div> <br> <br>-->
+    </div>
+    <?php
+        $uid = $_SESSION['id'];
+        $query = "SELECT * FROM Accounts WHERE CustomerID = '$uid' ORDER by ID ASC";
+        if ($result = $mysqli->query($query)) {
+          echo "<div class='container'>";
+          while ($account = $result->fetch_assoc()) {
+            echo "<p> Account Type: " . $account["AccountType"] . "</p>";
+            echo "<p> Balance: " . $account["Balance"] . "</p>";
+          }
+          echo "</div>";
+          $result->free();
+        } else {
+          echo "No result";
+        }
+        $mysqli->close();
+    ?>
+    <br> <br
   <p>If you would like to deposit or withdraw money, click here:</p>    
   <div>
     <a href="Action.html" class="backbtn">Action</a>
@@ -140,7 +126,7 @@
     <div>
       <button type="submit">Create New Account</button>
     </div>
-  </form>
+  </div>
  
 </body>
 </html>

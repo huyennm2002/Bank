@@ -3,7 +3,7 @@ In the dashboard page (Dashboard.html) we are displaying the following informati
 After login is successful, the sigin in "Signup.php" following session variables must be set so that we can display their values:
 
 $_SESSION['loginSuccessful'] = True;
-$_SESSION['cid'] = CID;
+$_SESSION['id'] = CID;
 $_SESSION['name'] = Name;
 $_SESSION['accountType'] = Account Type;
 $_SESSION['aid'] = AID;
