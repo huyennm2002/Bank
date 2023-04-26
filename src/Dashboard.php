@@ -72,6 +72,7 @@
   </style>
 </head>
 <body>
+<div><center>
   <div class="input">
     <a href="Logout.php" class="backbtn">Log Out</a>
   </div>
@@ -126,7 +127,11 @@
     <div>
       <button type="submit">Create New Account</button>
     </div>
-  </div>
+
+    <div>
+      <button type="submit">Delete Account</button>
+    </div>
+</center></div>  
  
 </body>
 </html>
