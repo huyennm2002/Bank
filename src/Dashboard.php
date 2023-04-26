@@ -113,6 +113,11 @@
   <div>
     <a href="Transaction.html" class="backbtn">Transaction</a>
   </div><br>
+
+  <p>If you would like to view your Transactions, click here:</p> 
+  <div>
+    <a href="Show-Transaction.php" class="backbtn">Show Transaction</a>
+  </div><br>
     
         <p>If you would like to create another account, click here:</p> 
   <div>
