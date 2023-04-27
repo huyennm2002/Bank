@@ -18,7 +18,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Homepage</title>
+  <title>Dashboard</title>
   <style>
     .input {
       padding: 16px;
@@ -69,14 +69,38 @@
       background-color: #87CEFA;
       color: #7B68EE;
     }
+    .avatar {
+      vertical-align: middle;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+  }
+    
   </style>
 </head>
 <body>
+    <img align=right src="profilePic.png" id="profilePic" alt="Profile Picture" class="avatar">
+<div><center>
   <div class="input">
     <a href="Logout.php" class="backbtn">Log Out</a>
   </div>
   <h1><center>Lawrence Public Bank Dashboard</center></h1>
 
+<div class="profile-pic">
+ 
+<center><img src="profilePic.png" id="blankProfilePic" height="100" width="100" /><br><br>
+<span>Change profile image</span>
+<input type="file" name="newProfilePic" id="newProfilePic" accept="image/*" onchange="loadFile(event)"><br><br>
+<script>
+  var loadFile = function(event) {
+    var output = document.getElementById('blankProfilePic');
+    output.src = URL.createObjectURL(event.target.files[0]);
+    output.onload = function() {
+      URL.revokeObjectURL(output.src) // free memory
+    }
+  };
+</script>
+</center></div>
   <div>
     <div class="input">
       Name:
@@ -112,6 +136,11 @@
   <div>
     <a href="Transaction.php" class="backbtn">Transaction</a>
   </div><br>
+
+  <p>If you would like to view your Transactions, click here:</p> 
+  <div>
+    <a href="Show-Transaction.php" class="backbtn">Show Transaction</a>
+  </div><br>
     
         <p>If you would like to create another account, click here:</p> 
   <div>
@@ -125,8 +154,12 @@
   
     <div>
       <button type="submit">Create New Account</button>
+    </div><br>
+
+    <div>
+      <button type="submit">Delete Account</button>
     </div>
-  </div>
+</center></div>  
  
 </body>
 </html>
