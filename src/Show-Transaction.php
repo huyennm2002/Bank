@@ -1,3 +1,18 @@
+<?php
+  session_start();
+  include 'Connection.php';
+  if(isset($_SESSION['loginSuccessful'])){
+    $loginSuccessful = $_SESSION['loginSuccessful']; 
+    if ($loginSuccessful == False){
+      header('Location: SignIn.html');
+      exit();
+    }
+  } else{
+    header('Location: SignIn.html');
+    exit();
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -54,22 +69,29 @@
       background-color: #87CEFA;
       color: #7B68EE;
     }
+    .item {
+        border-color: black;
+        margin-top: 10px;
+    }
   </style>
 </head>
 <body>
-  <h1><center>Your Transactions</center></h1> 
+  <h1><center>Your Transactions</center></h1>
     <div>
         <?php
-        $tid = $_SESSION['id'];
-        $query = "SELECT * FROM Customers WHERE ID = '$tid' ORDER by ID ASC";
+        $uid = $_SESSION['id'];
+        $query = "SELECT Transactions.* FROM Transactions, Accounts WHERE Accounts.ID = Transactions.SenderID OR Accounts.ID = Transactions.ReceiverID AND Accounts.ID = '$uid'";
         if ($result = $mysqli->query($query)) {
           echo "<div class='container'>";
-          while{
+          while ($transaction = $result->fetch_assoc()) {
+            echo "<div class='item'>";
             echo "<p> SenderID: " . $transaction["SenderID"] . "</p>";
             echo "<p> ReceiverID: " . $transaction["ReceiverID"] . "</p>";
             echo "<p> Note: " . $transaction["Note"] . "</p>";
             echo "<p> Amount: " . $transaction["Amount"] . "</p>";
             echo "<p> TransactionDate: " . $transaction["TransactionDate"] . "</p>";
+            echo "<br> <br";
+            echo "</div>";
           }
           echo "</div>";
           $result->free();
