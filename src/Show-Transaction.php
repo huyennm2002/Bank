@@ -57,9 +57,7 @@
   </style>
 </head>
 <body>
-  <h1><center>Your Transactions</center></h1>
-  
-  
+  <h1><center>Your Transactions</center></h1> 
     <div>
         <?php
         $tid = $_SESSION['id'];
