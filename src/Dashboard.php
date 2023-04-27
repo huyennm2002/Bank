@@ -153,11 +153,25 @@
   </div><br>
   
     <div>
-      <button type="submit">Create New Account</button>
+      //cach 1
+      <button href="Createaccount.php" type="submit">Create New Account</button>
+      //cach2
+      <?php 
+        echo '<form method="POST" action="Createaccount.php">
+        <input type="submit"/>
+        </form>';
+      ?>
     </div><br>
 
     <div>
-      <button type="submit">Delete Account</button>
+      //cach 1
+      <button href="Deleteacount.php" type="submit">Delete Account</button>
+      //cach 2
+      <?php 
+        echo '<form method="POST" action="Deleteaccount.php">
+        <input type="submit"/>
+        </form>';
+      ?>
     </div>
 </center></div>  
  
