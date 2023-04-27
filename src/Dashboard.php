@@ -154,10 +154,20 @@
   
     <div>
       <button type="submit">Create New Account</button>
+      <?php 
+        echo '<form method="POST" action="Createaccount.php">
+        <input type="submit"/>
+        </form>';
+      ?>
     </div><br>
 
     <div>
       <button type="submit">Delete Account</button>
+      <?php 
+        echo '<form method="POST" action="Deleteaccount.php">
+        <input type="submit"/>
+        </form>';
+      ?>
     </div>
 </center></div>  
  
