@@ -18,7 +18,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Homepage</title>
+  <title>Withdraw/Deposit</title>
   <style>
     .input {
       padding: 16px;
@@ -72,61 +72,45 @@
   </style>
 </head>
 <body>
-  <div class="input">
-    <a href="Logout.php" class="backbtn">Log Out</a>
-  </div>
-  <h1><center>Lawrence Public Bank Dashboard</center></h1>
-
-  <div>
+  <h1><center>Action</center></h1>
+  <form action="Createaction.php" method="POST">
+    <p style="font-size:150%;">To take an action, enter the following information:</p> 
     <div class="input">
-      Name:
-      <?php
-         if(isset($_SESSION['name'])){
-          echo $_SESSION['name']; 
-         }
-        ?>
+      <label for="typeAction">Type of action*:</label>
+      <select name="typeAction" id="typeAction">
+        <option value="deposit">Deposit</option>
+        <option value="withdrawal">Withdrawal</option>
+      </select>
     </div>
-    <?php
-        $uid = $_SESSION['id'];
-        $query = "SELECT * FROM Accounts WHERE CustomerID = '$uid' ORDER by ID ASC";
-        if ($result = $mysqli->query($query)) {
-          echo "<div class='container'>";
-          while ($account = $result->fetch_assoc()) {
-            echo "<p> Account Type: " . $account["AccountType"] . "</p>";
-            echo "<p> Balance: " . $account["Balance"] . "</p>";
+    <div class="input">
+      <label for="amount">Amount*</label>
+      <input type="text" placeholder="$"name="amount" value="" required>
+    </div>
+    <div class="input">
+      <label for="date">Date*</label>
+      <input type="text" placeholder="" type="date" name="date" value="" required>
+    </div>
+    <div class="input">
+      Choose account:
+      <select name="account-id" id="account-id">
+        <?php
+          $uid = $_SESSION['id'];
+          $query = "SELECT * FROM Accounts WHERE CustomerID = '$uid' ORDER by ID ASC";
+          if ($result = $mysqli->query($query)) {
+            while ($account = $result->fetch_assoc()) {
+              echo "<option value=".$account[ID].">" . $account["AccountType"] . "</option>";
+            }
+            $result->free();
+          } else {
+            echo "No result";
           }
-          echo "</div>";
-          $result->free();
-        } else {
-          echo "No result";
-        }
-        $mysqli->close();
-    ?>
-    <br> <br
-  <p>If you would like to deposit or withdraw money, click here:</p>    
-  <div>
-    <a href="Action.php" class="backbtn">Action</a>
-  </div><br>
-  
-    <p>If you would like to send money to someone, click here:</p> 
-  <div>
-    <a href="Transaction.php" class="backbtn">Transaction</a>
-  </div><br>
-    
-        <p>If you would like to create another account, click here:</p> 
-  <div>
-   <div class="input">
-  <label for="accountType">Choose account type*:</label>
-  <select name="accountType" id="accountType">
-    <option value="checkings">Checkings</option>
-    <option value="savings">Savings</option>
-  </select>
-  </div><br>
-  
-    <div>
-      <button type="submit">Create New Account</button>
+          $mysqli->close();
+        ?>
+      </select>
     </div>
-  </div>
- 
+    <div>
+      <button type="submit">Submit</button>
+    </div>
+  </form>
 </body>
 </html>
