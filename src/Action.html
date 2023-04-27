@@ -1,3 +1,22 @@
+<?php
+        session_start();
+          include 'Connection.php';
+         if(isset($_SESSION['loginSuccessful'])){
+         $loginSuccessful = $_SESSION['loginSuccessful']; 
+         echo $loginSuccessful;
+         if ($loginSuccessful == False){
+            header('Location: SignIn.html');
+            exit();
+            }
+         }
+         else{
+            header('Location: SignIn.html');
+            exit();
+         }
+
+      }
+  ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -66,22 +85,7 @@
   <img align=right src="profilePic.png" id="profilePic" alt="Profile Picture" class="avatar">
   <h1><center>Action</center></h1>
   
-    <?php
-         if(isset($_SESSION['loginSuccessful'])){
-         $loginSuccessful = $_SESSION['loginSuccessful']; 
-         if ($loginSuccessful == False){
-            header('Location: SignIn.html');
-            // or die();
-            exit();
-            }
-         }
-         else{
-            header('Location: SignIn.html');
-            exit();
-         }
-
-      }
-  ?>
+    
   
       <!--change the signin php file below to the correct php file--> 
   <form action="/src/backend/Action.php" method="POST">

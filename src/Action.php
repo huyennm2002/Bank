@@ -69,9 +69,16 @@
       background-color: #87CEFA;
       color: #7B68EE;
     }
+    .avatar {
+      vertical-align: middle;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+    }
   </style>
 </head>
 <body>
+<img align=right src="profilePic.png" id="profilePic" alt="Profile Picture" class="avatar">
   <h1><center>Action</center></h1>
   <form action="Createaction.php" method="POST">
     <p style="font-size:150%;">To take an action, enter the following information:</p> 
@@ -88,17 +95,17 @@
     </div>
     <div class="input">
       <label for="date">Date*</label>
-      <input type="text" placeholder="" type="date" name="date" value="" required>
+      <input type="date" placeholder="" name="date" value="" required>
     </div>
     <div class="input">
       Choose account:
       <select name="account-id" id="account-id">
         <?php
           $uid = $_SESSION['id'];
-          $query = "SELECT * FROM Accounts WHERE CustomerID = '$uid' ORDER by ID ASC";
+          $query = "SELECT * FROM Accounts WHERE CustomerID = $uid";
           if ($result = $mysqli->query($query)) {
             while ($account = $result->fetch_assoc()) {
-              echo "<option value=".$account[ID].">" . $account["AccountType"] . "</option>";
+              echo "<option value=".$account['ID'].">" . $account["AccountType"] . "</option>";
             }
             $result->free();
           } else {
