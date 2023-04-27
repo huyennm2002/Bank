@@ -126,54 +126,34 @@
         }
         $mysqli->close();
     ?>
-    <br> <br
+    <br> <br>
   <p>If you would like to deposit or withdraw money, click here:</p>    
   <div>
     <a href="Action.php" class="backbtn">Action</a>
   </div><br>
-  
     <p>If you would like to send money to someone, click here:</p> 
   <div>
-    <a href="Transaction.php" class="backbtn">Transaction</a>
+    <a href="Make-Transaction.php" class="backbtn">Transaction</a>
   </div><br>
 
   <p>If you would like to view your Transactions, click here:</p> 
   <div>
     <a href="Show-Transaction.php" class="backbtn">Show Transaction</a>
   </div><br>
-    
-        <p>If you would like to create another account, click here:</p> 
-  <div>
-   <div class="input">
-  <label for="accountType">Choose account type*:</label>
-  <select name="accountType" id="accountType">
-    <option value="checkings">Checkings</option>
-    <option value="savings">Savings</option>
-  </select>
-  </div><br>
-  
-    <div>
-      //cach 1
-      <button href="Createaccount.php" type="submit">Create New Account</button>
-      //cach2
-      <?php 
-        echo '<form method="POST" action="Createaccount.php">
-        <input type="submit"/>
-        </form>';
-      ?>
-    </div><br>
-
-    <div>
-      //cach 1
-      <button href="Deleteacount.php" type="submit">Delete Account</button>
-      //cach 2
-      <?php 
-        echo '<form method="POST" action="Deleteaccount.php">
-        <input type="submit"/>
-        </form>';
-      ?>
-    </div>
-</center></div>  
+    <p>If you would like to create another account, click here:</p> 
+    <form action="Createaccount.php" method="POST">
+        <label for="accountType">Choose account type:</label>
+        <select name="accountType" id="accountType">
+            <option value="checkings">Checkings</option>
+            <option value="savings">Savings</option>
+        </select>
+        <br/>
+        <button  type="submit" class="backbtn">Create New Account</button>
+    </form>
+    <!--<div>-->
+    <!--  <button type="submit">Delete Account</button>-->
+    <!--</div>-->
+</center> 
  
 </body>
 </html>
