@@ -1,51 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Make Transaction</title>
-</head>
-
-<body>
   <?php
-    ini_ set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
-    error_reporting(E_ALL);
     session_start();
-    $mysqli = new mysqli("mysql.eecs.ku.edu", "m449n496", "mae9AhH3", "m449n496");
-    if ( mysqli_connect_errno() ) {
-      printf("Connect failed: %s\n", $mysqli->connect_error);
-      exit();
-    }
+    include 'Connection.php';
     $note = $_POST['Note'];
     $amount = $_POST['Amount'];
     $transactiondate = $_POST['Date'];
-    $sender_id = $_SESSION['Sender-id'];
-    $receiver_id = $_SESSION['Receiver-id']; 
-    $acc_id = $_POST['account-id'];
+    $sender_id = $_SESSION['id'];
+    $receiver_id = $_POST['Receiver-id'];
    
 
-    if($note == '' || $amount == ''|| $transactiondate == '') {
+    if($receiver_id == '' || $amount == '') {
       error("Please enter all required fields");
-    } else{
-      if ($mysqli->connect_errno) {
-        printf("Connect failed: %s\n", $mysqli->connect_error);
-        exit();
-      } else{
-      $query = $mysqli -> prepare("SELECT amount(*) FROM Users WHERE id = '$acc_id'");
-      $query = "UPDATE Accounts SET balance = balance - $amount WHERE ID = '$sender_id'";
-      $create_query = "INSERT INTO Actions (AccountID, Amount, Note, TransactionDate) values ('$sender_id', '$amount', '$note', '$transactiondate','Transaction', NOW())";
-      if ($mysqli->query($sql) === TRUE && $mysqli->query($create_query)) {
+    } else {
+      //need to add check if balance > amount
+      $get_balance = "SELECT Balance FROM Customers WHERE ID = '$sender_id'";
+      $query = "UPDATE Accounts SET balance = balance - $amount WHERE CustomerID = '$sender_id'";
+      $create_query = "INSERT INTO Transactions (SenderID, ReceiverID, Amount, Note, TransactionDate) values ('$sender_id','$receiver_id', '$amount', '$note', NOW())";
+      if ($mysqli->query($sql) && $mysqli->query($create_query)) {
         echo "<p>The amount has been transfered successfully</p>";
       } else {
         echo "<p>Error, cannot make transaction</p>";
       }
-      $query = "UPDATE Accounts SET balance = balance + $amount WHERE ID = '$receiver_id'"; 
-      $create_query = "INSERT INTO Actions (AccountID, Amount, Note, TransactionDate) values ('$receiver_id', '$amount', '$note', '$transactiondate','Transaction', NOW())";
+      $query = "UPDATE Accounts SET balance = balance + $amount WHERE CustomerID = '$receiver_id'"; 
       $mysqli->close();
     }
-  }
 
   function error($msg) {
   ?>
@@ -59,12 +36,5 @@
     } 
   ?>
 
-<?php
-
-?>
-
-</body>
-
-</html>
 
 

@@ -36,16 +36,16 @@
       font-size: 14px;
       align-items: center;
     }
-    form {
-        align-items: center;
-        background-color: #ffffff;
-        color: black;
-        line-height: 24px;
-        width: 50%;
-        margin: 90px auto;
-        border-radius: 10px;
-        padding: 15px;
-        text-align: center;
+    .form {
+      align-items: center;
+      background-color: #ffffff;
+      color: black;
+      line-height: 24px;
+      width: 50%;
+      margin: 90px auto;
+      border-radius: 10px;
+      padding: 15px;
+      text-align: center;
     }
     button {
       background-color: #7B68EE;
@@ -73,11 +73,14 @@
         border-color: black;
         margin-top: 10px;
     }
+    .container {
+        margin: 'auto';
+    }
   </style>
 </head>
 <body>
   <h1><center>Your Transactions</center></h1>
-    <div>
+    <div class="form">
         <?php
         $uid = $_SESSION['id'];
         $query = "SELECT Transactions.* FROM Transactions, Accounts WHERE Accounts.ID = Transactions.SenderID OR Accounts.ID = Transactions.ReceiverID AND Accounts.ID = '$uid'";
@@ -101,7 +104,5 @@
         $mysqli->close();
     ?>
     </div>
-
-
 </body>
 </html>

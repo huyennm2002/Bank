@@ -1,3 +1,18 @@
+<?php
+  session_start();
+  include 'Connection.php';
+  if(isset($_SESSION['loginSuccessful'])){
+    $loginSuccessful = $_SESSION['loginSuccessful']; 
+    if ($loginSuccessful == False){
+      header('Location: SignIn.html');
+      exit();
+    }
+  } else{
+    header('Location: SignIn.html');
+    exit();
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -66,64 +81,41 @@
   <img align=right src="profilePic.png" id="profilePic" alt="Profile Picture" class="avatar">
   <h1><center>Transaction</center></h1>
   
-      <?php
-         if(isset($_SESSION['loginSuccessful'])){
-         $loginSuccessful = $_SESSION['loginSuccessful']; 
-         if ($loginSuccessful == False){
-            header('Location: SignIn.html');
-            // or die();
-            exit();
-            }
-         }
-         else{
-            header('Location: SignIn.html');
-            exit();
-         }
-
-      }
-  ?>
-  
-      <!--change the signin php file below to the correct php file--> 
-  <form action="/src/backend/Transaction.php" method="POST">
-
-       <p style="font-size:150%;">To make a transaction, enter the following information:</p> 
- 
-   <div class="input">
-  <label for="transactionType">Type of transaction*:</label>
-  <select name="transactionType" id="transactionType">
-    <option value="send">Send</option>
-    <option value="receive">Receive</option>
-  </select>
-  </div>
- 
+  <form action="MakeTransaction.php" method="POST">
+    <p style="font-size:150%;">To make a transaction, enter the following information:</p> 
     <div class="input">
-      <label for="senRecID">Sender's ID / ReceiverID*</label>
-      <input type="text" placeholder="Enter the ID here"name="senRecID" value="" required>
+      <label for="Receiver-id">Receiver Account ID*</label>
+      <input type="text" placeholder="Enter the ID here"name="Receiver-id" value="" required>
     </div>
-    
-
     <div class="input">
-      <label for="message">Message</label>
-      <input type="text" placeholder="Please enter your message here"name="message" value="" required>
+      <label for="Note">Message</label>
+      <input type="text" placeholder="Please enter your message here"name="Note" value="" required>
     </div> 
-    
-    
     <div class="input">
-      <label for="amount">Amount*</label>
-      <input type="text" placeholder="$"name="amount" value="" required>
+      <label for="Amount">Amount*</label>
+      <input type="text" placeholder="$"name="Amount" value="" required>
     </div>
-   
-
     <div class="input">
-      <label for="date">Date*</label>
-      <input type="text" placeholder="Enter date here"name="date" value="" required>
+      Choose account:
+      <select name="sender-id" id="account-id">
+        <?php
+          $uid = $_SESSION['id'];
+          $query = "SELECT * FROM Accounts WHERE CustomerID = $uid";
+          if ($result = $mysqli->query($query)) {
+            while ($account = $result->fetch_assoc()) {
+              echo "<option value=".$account['ID'].">" . $account["AccountType"] . "</option>";
+            }
+            $result->free();
+          } else {
+            echo "No result";
+          }
+          $mysqli->close();
+        ?>
+      </select>
     </div>
-   
     <div>
-      <button type="submit">Submit</button>
+      <button type="submit">Send</button>
     </div>
   </form>
-
-
 </body>
 </html>
