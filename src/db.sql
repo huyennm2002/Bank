@@ -35,3 +35,7 @@ CREATE TABLE IF NOT EXISTS Actions (
   ActionDate DATE NOT NULL,
   FOREIGN KEY (AccountID) REFERENCES Accounts(ID)
 );
+
+ALTER TABLE Customers
+ADD profileImage longblob,
+ADD imageType VARCHAR(255);
