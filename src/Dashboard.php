@@ -74,8 +74,16 @@
       width: 50px;
       height: 50px;
       border-radius: 50%;
-  }
-    
+    }
+    .container {
+        border-style: solid;
+        width: 50%;
+        padding: 10px;
+    }
+    .account-item {
+        border-style: groove;
+        width: 25%;
+    }
   </style>
 </head>
 <body>
@@ -116,8 +124,11 @@
         if ($result = $mysqli->query($query)) {
           echo "<div class='container'>";
           while ($account = $result->fetch_assoc()) {
+            echo "<div class='account-item'>";
+            echo "<p> Account ID: ". $account["ID"] . "</p>";
             echo "<p> Account Type: " . $account["AccountType"] . "</p>";
             echo "<p> Balance: " . $account["Balance"] . "</p>";
+            echo "</div>";
           }
           echo "</div>";
           $result->free();
@@ -150,9 +161,9 @@
         <br/>
         <button  type="submit" class="backbtn">Create New Account</button>
     </form>
-    <!--<div>-->
-    <!--  <button type="submit">Delete Account</button>-->
-    <!--</div>-->
+    <div>
+      <button type="submit">Delete Account</button>
+    </div>
 </center> 
  
 </body>
