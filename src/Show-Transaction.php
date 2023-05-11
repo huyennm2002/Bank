@@ -36,7 +36,7 @@
       font-size: 14px;
       align-items: center;
     }
-    .form {
+    .main {
       align-items: center;
       background-color: #ffffff;
       color: black;
@@ -70,39 +70,84 @@
       color: #7B68EE;
     }
     .item {
-        border-color: black;
-        margin-top: 10px;
+      border-color: black;
+      margin-top: 10px;
     }
     .container {
-        margin: 'auto';
+      margin: 'auto';
+    }
+    .scroll-section {
+      height: 200px;
+      aoverflow: auto;
+    }
+    .column {
+      float: left;
+      width: 50%;
     }
   </style>
 </head>
 <body>
   <h1><center>Your Transactions</center></h1>
-    <div class="form">
-        <?php
-        $uid = $_SESSION['id'];
-        $query = "SELECT Transactions.* FROM Transactions, Accounts WHERE Accounts.ID = Transactions.SenderID OR Accounts.ID = Transactions.ReceiverID AND Accounts.ID = '$uid'";
-        if ($result = $mysqli->query($query)) {
-          echo "<div class='container'>";
-          while ($transaction = $result->fetch_assoc()) {
-            echo "<div class='item'>";
-            echo "<p> SenderID: " . $transaction["SenderID"] . "</p>";
-            echo "<p> ReceiverID: " . $transaction["ReceiverID"] . "</p>";
-            echo "<p> Note: " . $transaction["Note"] . "</p>";
-            echo "<p> Amount: " . $transaction["Amount"] . "</p>";
-            echo "<p> TransactionDate: " . $transaction["TransactionDate"] . "</p>";
-            echo "<br> <br";
-            echo "</div>";
-          }
-          echo "</div>";
-          $result->free();
-        } else {
-          echo "No result";
-        }
-        $mysqli->close();
-    ?>
+    <div class="main">
+        <div class="row">
+            <div class="column">
+                <div class="scroll-section">
+                    <h3> Recent Transfer Transactions </h3>
+                        <?php
+                          $uid = $_SESSION['id'];
+                          $query = "SELECT * FROM Transactions INNER JOIN Accounts ON Accounts.ID = Transactions.SenderID INNER JOIN Customers ON Accounts.CustomerID = Customers.ID WHERE Customers.ID = '$uid' ORDER BY TransactionDate DESC LIMIT 10";
+                          if ($result = $mysqli->query($query)) {
+                            echo "<div class='container'>";
+                            while ($transaction = $result->fetch_assoc()) {
+                              echo "<div class='item'>";
+                              echo "<p> Sender Account ID: " . $transaction["SenderID"] . "</p>";
+                              echo "<p> Receiver Account ID: " . $transaction["ReceiverID"] . "</p>";
+                              echo "<p> Account type: " . $transaction["AccountType"] . "</p>";
+                              echo "<p> Note: " . $transaction["Note"] . "</p>";
+                              echo "<p> Amount: $" . $transaction["Amount"] . "</p>";
+                              echo "<p> Transaction Date: " . $transaction["TransactionDate"] . "</p>";
+                              echo "<br>";
+                              echo "</div>";
+                            }
+                            echo "</div>";
+                            $result->free();
+                          } else {
+                            echo "No transactions";
+                          }
+                        ?>
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="scroll-section">
+                    <h3> Recent Received Payments </h3>
+                        <?php
+                          $uid = $_SESSION['id'];
+                          $query = "SELECT * FROM Transactions INNER JOIN Accounts ON Accounts.ID = Transactions.ReceiverID INNER JOIN Customers ON Accounts.CustomerID = Customers.ID WHERE Customers.ID = '$uid' ORDER BY TransactionDate DESC LIMIT 10";
+                          if ($result = $mysqli->query($query)) {
+                            echo "<div class='container'>";
+                            while ($transaction = $result->fetch_assoc()) {
+                              echo "<div class='item'>";
+                              echo "<p> Sender Account ID: " . $transaction["SenderID"] . "</p>";
+                              echo "<p> Receiver Account ID: " . $transaction["ReceiverID"] . "</p>";
+                              echo "<p> Account type: " . $transaction["AccountType"] . "</p>";
+                              echo "<p> Note: " . $transaction["Note"] . "</p>";
+                              echo "<p> Amount: $" . $transaction["Amount"] . "</p>";
+                              echo "<p> Transaction Date: " . $transaction["TransactionDate"] . "</p>";
+                              echo "<br>";
+                              echo "</div>";
+                            }
+                            echo "</div>";
+                            $result->free();
+                          } else {
+                            echo "No transactions";
+                          }
+                        ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+      
     </div>
 </body>
 </html>
