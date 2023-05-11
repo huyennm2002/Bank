@@ -131,11 +131,9 @@
             echo "</div>";
           }
           echo "</div>";
-          $result->free();
         } else {
           echo "No result";
         }
-        $mysqli->close();
     ?>
     <br> <br>
   <p>If you would like to deposit or withdraw money, click here:</p>    
@@ -161,9 +159,27 @@
         <br/>
         <button  type="submit" class="backbtn">Create New Account</button>
     </form>
-    <div>
-      <button type="submit">Delete Account</button>
-    </div>
+    <form action="Deleteaccount.php" method="POST">
+      <label for="toDelete">Choose account to delete:</label>
+      <br/>
+      <select name="toDelete" id="toDelete">
+        <?php
+          if ($result = $mysqli->query($query)) {
+            echo "<div class='container'>";
+            while ($account = $result->fetch_assoc()) {
+              echo "<option value=".$account['ID'].">" . $account["AccountType"] . " - ID: ".$account['ID'] . "</option>";
+            }
+            echo "</div>";
+          } else {
+            echo "No result";
+          }
+          $result->free();
+          $mysqli->close();
+        ?>
+      </select>
+      <p>You should only choose to delete an account when the account balance is equal to 0.</p>
+      <button  type="submit" class="backbtn">Delete Account</button>
+    </form>
 </center> 
  
 </body>

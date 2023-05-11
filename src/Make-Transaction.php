@@ -103,7 +103,7 @@
           $query = "SELECT * FROM Accounts WHERE CustomerID = $uid";
           if ($result = $mysqli->query($query)) {
             while ($account = $result->fetch_assoc()) {
-              echo "<option value=".$account['ID'].">" . $account["AccountType"] . "</option>";
+              echo "<option value=".$account['ID'].">" . $account["AccountType"] . " - ID: ".$account['ID'] . "</option>";
             }
             $result->free();
           } else {
