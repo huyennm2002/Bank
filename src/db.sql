@@ -36,6 +36,7 @@ CREATE TABLE IF NOT EXISTS Actions (
   FOREIGN KEY (AccountID) REFERENCES Accounts(ID)
 );
 
+-- Update table
 ALTER TABLE Customers
 ADD profileImage longblob,
 ADD imageType VARCHAR(255);

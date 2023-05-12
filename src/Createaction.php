@@ -14,7 +14,7 @@
         $query = "UPDATE Accounts SET balance = balance - $amount WHERE ID = '$acc_id'";
     }
     
-    $create_query = "INSERT INTO Actions (AccountID, Amount, ActionType, ActionDate) values ('$acc_id', '$amount', 'Withdraw', NOW())";
+    $create_query = "INSERT INTO Actions (AccountID, Amount, ActionType, ActionDate) values ('$acc_id', '$amount', '$type', NOW())";
     if ($mysqli->query($query) === TRUE && $mysqli->query($create_query)) {
       header("Location: Dashboard.php");
       exit();
