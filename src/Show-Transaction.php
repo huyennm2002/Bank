@@ -84,9 +84,31 @@
       float: left;
       width: 50%;
     }
+    .avatar {
+      vertical-align: middle;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+  }
+
   </style>
 </head>
 <body>
+<div>
+  <center>
+  <div class="input">
+    <a href="Dashboard.php" class="backbtn">Back to Dashboard</a>
+  </center>
+</div>
+
+<?php
+  if(isset($_SESSION['profileImage']) && isset($_SESSION['imageType'])){
+    echo '<img align=right src = "data:'.$_SESSION['imageType'].';base64,'.($_SESSION['profileImage']) .'" id="profilePic" alt="Profile Picture D" class="avatar"/>';
+  }
+  else{
+    echo '<img align=right src="profilePic.png" id="profilePic" alt="Profile Picture" class="avatar">';    
+  }
+?>
   <h1><center>Your Transactions</center></h1>
     <div class="main">
         <div class="row">

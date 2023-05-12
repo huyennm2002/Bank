@@ -17,10 +17,23 @@
     $ssn = $_POST['ssn'];
     $address = $_POST['address'];
     $acc_type = $_POST['accountType'];
+    // Check if file was uploaded without errors    
+    if (isset($_FILES["newProfilePic"]) && $_FILES["newProfilePic"]["error"] == 0) 
+    { 
+      $file_type= $_FILES["newProfilePic"]["type"];
+      $imgBlob = base64_encode(file_get_contents($_FILES["newProfilePic"]["tmp_name"]));
+    }
+    else
+    {
+      $file_info = new finfo(FILEINFO_MIME_TYPE);
+      $imgBlob = base64_encode(file_get_contents("profilePic.png" ));
+      $file_type = $file_info->buffer(file_get_contents("profilePic.png" ));
+    }
+
     if($name == '' || $email == ''|| $pw == '' || $ssn == '') {
       error("Please enter all required fields");
     } else {
-      $sql = "INSERT INTO Customers (Name, Email, Password, SSN, ADDRESS, Phone) VALUES ('$name', '$email', '$pw', '$ssn', '$address', '$phone');";
+      $sql = "INSERT INTO Customers (Name, Email, Password, SSN, ADDRESS, Phone, profileImage, imageType) VALUES ('$name', '$email', '$pw', '$ssn', '$address', '$phone', '$imgBlob', '$file_type' );";
       if ($mysqli->query($sql) === TRUE) {
         echo "<p>User was successfully created</p>";
 

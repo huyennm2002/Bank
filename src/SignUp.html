@@ -54,6 +54,12 @@
       background-color: #87CEFA;
       color: #7B68EE;
     }
+    .avatar {
+      vertical-align: middle;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+    }
   </style>
 </head>
 <body>
@@ -61,9 +67,11 @@
     <a href="SignIn.html" class="backbtn">Already have an account?</a>
   </div><br>
   <h1><center>WELCOME TO Lawrence Public Bank!</center></h1>
-  <p>This application should take up to 5 minutes to complete. Note that you must be 18 or older to apply online.</p>
-  <p>For a NEW membership you will need:</p>
-  <form action="Signup.php" method="POST">
+  <center>
+  <p>This application should take up to 5 minutes to complete. Note that you must be 18 or older to apply online.<br>
+  For a NEW membership you will need:</p>
+  </center>
+  <form action="Signup.php" enctype="multipart/form-data" method="POST">
       <!--  1)Jaga--> 
        <p style="font-size:150%;">Create User:</p> 
     <div class="input">
@@ -103,12 +111,33 @@
     </select>
     </div><br>
   
+    <div class="profile-pic">
+      <center>
+        <img src="profilePic.png" id="blankProfilePic" height="100" width="100" />
+        <br/>
+          <span>Upload profile image</span>
+          <input type="file" name="newProfilePic" id="newProfilePic" accept="image/*" onchange="loadFile(event)"/>
+        </center>          
+      <script>
+        var loadFile = function(event) {
+          var output = document.getElementById('blankProfilePic');
+          output.src = URL.createObjectURL(event.target.files[0]);
+          output.onload = function() {
+            URL.revokeObjectURL(output.src) // free memory
+          }
+        };
+      </script>
+    </div>
+    
+
+
+
     <div>
       <input type="submit">
     </div>
   </form>
        <!-- 3)reduce space--> 
-       <p style="font-size:60%;">IMPORTANT INFORMATION: We are required, by federal law, to obtain, verify, and record information that identifies each person opening or having access to a DCU Account. We will ask for your legal name, residential address, Social Security Number (SSN) or Individual Taxpayer Identification Number (ITIN), Phone Number, and Date of Birth and may ask to see corroborating documentation.</p>
+       <p style="font-size:60%;">IMPORTANT INFORMATION: We are required, by federal law, to obtain, verify, and record information that identifies each person opening or having access to a Bank Account. We will ask for your legal name, residential address, Social Security Number (SSN) or Individual Taxpayer Identification Number (ITIN), Phone Number, and Date of Birth and may ask to see corroborating documentation.</p>
          <p style="font-size:60%;">By continuing this application you certify you are applying for this account on your own behalf and will not share your login credentials with anyone.</p><br>
 
 </body>

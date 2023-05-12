@@ -8,6 +8,8 @@ $_SESSION['name'] = Name;
 $_SESSION['accountType'] = Account Type;
 $_SESSION['aid'] = AID;
 $_SESSION['balance'] = Balance;
+$_SESSION['profileImage'] = profileImage;
+$_SESSION['imageType'] = imageType;
 
 If login is successful further all pages and queries related to customer depends on CID#, also fill all remaining variables, if login fails set the value 'loginSuccessful' = False; Do not set remaining variables.
 

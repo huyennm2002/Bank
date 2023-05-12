@@ -87,29 +87,54 @@
   </style>
 </head>
 <body>
-    <img align=right src="profilePic.png" id="profilePic" alt="Profile Picture" class="avatar">
-<div><center>
+
+<?php
+  //echo 'imageType '.$_SESSION['imageType'];
+  //echo '<img src = "data:'.$_SESSION['imageType'].';base64,'.($_SESSION['profileImage']) .'" width = "50px" height = "50px"/>';
+
+  if(isset($_SESSION['profileImage']) && isset($_SESSION['imageType'])){
+    echo '<img align=right src = "data:'.$_SESSION['imageType'].';base64,'.($_SESSION['profileImage']) .'" id="profilePic" alt="Profile Picture D" class="avatar"/>';
+  }
+  else{
+    echo '<img align=right src="profilePic.png" id="profilePic" alt="Profile Picture" class="avatar">';    
+  }
+?>
+<div>
+  <center>
   <div class="input">
     <a href="Logout.php" class="backbtn">Log Out</a>
-  </div>
+  </center>
+</div>
   <h1><center>Lawrence Public Bank Dashboard</center></h1>
 
 <div class="profile-pic">
- 
-<center><img src="profilePic.png" id="blankProfilePic" height="100" width="100" /><br><br>
-<span>Change profile image</span>
-<input type="file" name="newProfilePic" id="newProfilePic" accept="image/*" onchange="loadFile(event)"><br><br>
-<script>
-  var loadFile = function(event) {
-    var output = document.getElementById('blankProfilePic');
-    output.src = URL.createObjectURL(event.target.files[0]);
-    output.onload = function() {
-      URL.revokeObjectURL(output.src) // free memory
-    }
-  };
-</script>
-</center></div>
-  <div>
+  <center>
+   <form name="frmChangeImage" enctype="multipart/form-data" action="ChangeProfilePic.php" method="POST"> 
+    <?php
+      if(isset($_SESSION['profileImage']) && isset($_SESSION['imageType'])){
+        echo '<img src = "data:'.$_SESSION['imageType'].';base64,'.($_SESSION['profileImage']) .'" id="blankProfilePic" height="100" width="100" />';
+      }
+      else{
+        echo '<img src="profilePic.png" id="blankProfilePic" height="100" width="100" />';    
+      }
+    ?>
+    <br/>
+      <span>Change profile image</span>
+      <input type="file" name="newProfilePic" id="newProfilePic" accept="image/*" onchange="loadFile(event)"/>
+      <button  type="submit" class="backbtn">Change the profile  picture</button>
+  </form>
+  <script>
+    var loadFile = function(event) {
+      var output = document.getElementById('blankProfilePic');
+      output.src = URL.createObjectURL(event.target.files[0]);
+      output.onload = function() {
+        URL.revokeObjectURL(output.src) // free memory
+      }
+    };
+  </script>
+  </center>
+</div>
+<div><center>
     <div class="input">
       Name:
       <?php

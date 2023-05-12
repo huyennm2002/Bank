@@ -78,7 +78,21 @@
   </style>
 </head>
 <body>
-  <img align=right src="profilePic.png" id="profilePic" alt="Profile Picture" class="avatar">
+<div>
+  <center>
+  <div class="input">
+    <a href="Dashboard.php" class="backbtn">Back to Dashboard</a>
+  </center>
+</div>
+
+<?php
+  if(isset($_SESSION['profileImage']) && isset($_SESSION['imageType'])){
+    echo '<img align=right src = "data:'.$_SESSION['imageType'].';base64,'.($_SESSION['profileImage']) .'" id="profilePic" alt="Profile Picture D" class="avatar"/>';
+  }
+  else{
+    echo '<img align=right src="profilePic.png" id="profilePic" alt="Profile Picture" class="avatar">';    
+  }
+?>
   <h1><center>Transaction</center></h1>
   
   <form action="MakeTransaction.php" method="POST">
