@@ -60,22 +60,22 @@
 
   function error($msg) {
   ?>
-      <form method="GET" action="SignUp.html">
-        <div class="container">
-          <span>Error: <?= $msg ?></span>
-          <button class="backbtn" type="submits">Try again!</button>
-        </div>
-      </form>
+    <form method="GET" action="SignUp.html">
+      <div class="container">
+        <span>Error: <?= $msg ?></span>
+        <button class="backbtn" type="submits">Try again!</button>
+      </div>
+    </form>
     <?php
   }
 
   function signInBtn() {
   ?>
-      <form method="GET" action="SignIn.html">
-        <div class="container">
-          <button class="backbtn" type="submits">Sign In</button>
-        </div>
-      </form>
+    <form method="GET" action="SignIn.html">
+      <div class="container">
+        <button class="backbtn" type="submits">Sign In</button>
+      </div>
+    </form>
     <?php
   }
   ?>

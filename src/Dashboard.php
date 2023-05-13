@@ -89,9 +89,6 @@
 <body>
 
 <?php
-  //echo 'imageType '.$_SESSION['imageType'];
-  //echo '<img src = "data:'.$_SESSION['imageType'].';base64,'.($_SESSION['profileImage']) .'" width = "50px" height = "50px"/>';
-
   if(isset($_SESSION['profileImage']) && isset($_SESSION['imageType'])){
     echo '<img align=right src = "data:'.$_SESSION['imageType'].';base64,'.($_SESSION['profileImage']) .'" id="profilePic" alt="Profile Picture D" class="avatar"/>';
   }

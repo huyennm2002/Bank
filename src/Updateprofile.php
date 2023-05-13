@@ -9,15 +9,8 @@
 
 <body>
   <?php
-    ini_ set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
-    error_reporting(E_ALL);
     session_start();
-    $mysqli = new mysqli("mysql.eecs.ku.edu", "m449n496", "mae9AhH3", "m449n496");
-    if ( mysqli_connect_errno() ) {
-      printf("Connect failed: %s\n", $mysqli->connect_error);
-      exit();
-    }
+    include 'Connection.php';
     $name= $_POST ['name'];
     $email = $_POST['email'];
     $phone= $_POST ['phone'];
